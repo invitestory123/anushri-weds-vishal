@@ -28,19 +28,22 @@ window.WEDDING_DATA = {
     dateShort: "20 · 12 · 2026",
     timeLabel: "10:30 AM – 11:30 AM",
     muhurthamLabel: "Muhurtham · 10:30 AM – 11:30 AM",
-    footerDateLocation: "20 · 12 · 2026 · Eachur, Kannur",
+    footerDateLocation: "20 · 12 · 2026 · Kannur, Kerala",
     sangeeth: {
       title: "Sangeeth Night",
       venue: "Arabian Beach Resort",
       time: "From 5:00 PM onwards",
+      address: "Palliyammoola, Payyambalam Beach Road, Kannur, Kerala - 670014",
+      mapsUrl: "https://share.google/FoqulMfRQskuKidvH",
     },
   },
 
   venue: {
     name: "CR Auditorium, Eachur",
     address: "CR Auditorium, Eachur, Kannur, Kerala - 670591",
-    locationShort: "Eachur, Kannur",
+    locationShort: "Kannur, Kerala",
     mapsUrl: "https://share.google/PCLpVzqm5MXZN5yz4",
+    mapUrl: "https://share.google/PCLpVzqm5MXZN5yz4",
   },
 
   images: {
