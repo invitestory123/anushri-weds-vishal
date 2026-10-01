@@ -24,10 +24,10 @@ window.WEDDING_DATA = {
   wedding: {
     dateISO: "2026-12-20T10:30:00+05:30",
     endISO: "2026-12-20T13:30:00+05:30",
-    dateLabel: "Sunday, 20 December 2026",
+    dateLabel: "20th December 2026, Sunday",
     dateShort: "20 · 12 · 2026",
-    timeLabel: "10:30 AM – 11:30 AM",
-    muhurthamLabel: "Muhurtham · 10:30 AM – 11:30 AM",
+    timeLabel: "Muhurtham between 10:30 - 11:30 am",
+    muhurthamLabel: "Muhurtham between 10:30 - 11:30 am",
     footerDateLocation: "20 · 12 · 2026 · Kannur, Kerala",
     sangeeth: {
       title: "Sangeeth Night",
@@ -36,6 +36,13 @@ window.WEDDING_DATA = {
       address: "Palliyammoola, Payyambalam Beach Road, Kannur, Kerala - 670014",
       mapsUrl: "https://share.google/FoqulMfRQskuKidvH",
     },
+  },
+
+  rsvp: {
+    phone: "+919173075928",
+    whatsappClean: "919173075928",
+    title: "Guest Tracker & RSVP",
+    subtitle: "We would be honored by your presence",
   },
 
   venue: {
