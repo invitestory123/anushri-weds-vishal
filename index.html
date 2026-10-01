@@ -174,26 +174,131 @@
         max-width: 320px !important;
       }
 
-      /* --- 4. Share Section Styling --- */
-      .share-subtitle,
-      [class*="share-subtitle"],
-      [class*="text-ivory\/80"] {
-        color: #FFF9EA !important;
-        opacity: 0.95 !important;
-        font-size: 1rem !important;
+      /* --- 4. Share Section Spacing & Refined Styling --- */
+      .share-section-container,
+      section[class*="share-section-container"] {
+        padding-top: 5rem !important;
+        padding-bottom: 5.5rem !important;
+        position: relative !important;
+      }
+      .share-eyebrow {
+        font-family: 'Cinzel', serif !important;
+        font-size: 0.72rem !important;
+        letter-spacing: 0.45em !important;
+        color: #FCE38A !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        margin-bottom: 0.9rem !important;
+        display: block !important;
+      }
+      .share-heading {
+        font-family: 'Cormorant Garamond', Georgia, serif !important;
+        font-size: clamp(2.1rem, 6vw, 2.7rem) !important;
+        letter-spacing: 0.06em !important;
+        color: #FFFFFF !important;
+        font-weight: 400 !important;
+        margin: 0.6rem 0 0.8rem !important;
+        line-height: 1.2 !important;
+      }
+      .share-subtitle {
+        font-family: 'Cormorant Garamond', Georgia, serif !important;
+        font-style: italic !important;
+        font-size: 1.15rem !important;
+        color: rgba(255, 249, 235, 0.9) !important;
+        margin: 0.6rem 0 1.8rem !important;
+        line-height: 1.5 !important;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
       }
-      .share-wa-btn,
-      [class*="share-wa-btn"],
-      [class*="bg-\[\#25D366\]"] {
-        background-color: #25D366 !important;
-        color: #ffffff !important;
+      .share-lotus-divider {
+        margin: 1.6rem auto 2.2rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.8rem !important;
+      }
+      .share-buttons-wrap {
+        margin-top: 2rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 1.1rem !important;
+        max-width: 420px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      .share-buttons-row {
+        display: flex !important;
+        width: 100% !important;
+        gap: 1rem !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      .share-wa-btn {
+        background: linear-gradient(135deg, #25D366 0%, #1CAA51 100%) !important;
+        color: #FFFFFF !important;
+        font-family: 'Cinzel', 'Montserrat', sans-serif !important;
+        font-size: 0.82rem !important;
         font-weight: 700 !important;
         letter-spacing: 0.08em !important;
-        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45) !important;
+        padding: 0.95rem 1.4rem !important;
+        border-radius: 1.1rem !important;
+        box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3) !important;
+        border: none !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.5rem !important;
+        flex: 1 !important;
+        text-transform: uppercase !important;
       }
       .share-wa-btn svg {
-        fill: #ffffff !important;
+        fill: #FFFFFF !important;
+      }
+      .share-cal-btn {
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1.5px solid rgba(220, 185, 80, 0.45) !important;
+        color: #FFFFFF !important;
+        font-family: 'Cinzel', 'Montserrat', sans-serif !important;
+        font-size: 0.82rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.06em !important;
+        padding: 0.95rem 1.2rem !important;
+        border-radius: 1.1rem !important;
+        backdrop-filter: blur(8px) !important;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.5rem !important;
+        flex: 1 !important;
+        cursor: pointer !important;
+        text-transform: uppercase !important;
+      }
+      .share-cal-btn svg {
+        color: #FCE38A !important;
+      }
+      .share-copy-btn {
+        background: rgba(255, 255, 255, 0.06) !important;
+        border: 1px solid rgba(220, 185, 80, 0.45) !important;
+        color: #FCE38A !important;
+        font-family: 'Cinzel', 'Montserrat', sans-serif !important;
+        font-size: 0.82rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.1em !important;
+        padding: 0.75rem 2.4rem !important;
+        border-radius: 1rem !important;
+        backdrop-filter: blur(8px) !important;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2) !important;
+        margin-top: 0.4rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.5rem !important;
+        cursor: pointer !important;
+        text-transform: uppercase !important;
+      }
+      .share-copy-btn svg {
+        color: #FCE38A !important;
       }
 
       /* --- 5. Guest Tracker & RSVP Section Styling --- */
