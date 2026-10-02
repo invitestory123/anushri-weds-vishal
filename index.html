@@ -245,6 +245,20 @@
         }
       }
 
+      /* --- Opener Names Spacing --- */
+      h1.font-display {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.65rem !important;
+        flex-wrap: wrap !important;
+      }
+      .opener-ampersand,
+      h1.font-display span.font-script {
+        margin: 0 0.85rem !important;
+        display: inline-block !important;
+      }
+
       /* --- 4. Share Section Spacing & Refined Styling --- */
       .share-section-container,
       section[class*="share-section-container"] {
@@ -641,7 +655,7 @@
                 <label class="gt-label">Will you be attending?</label>
                 <div class="gt-attendance-row">
                   <button type="button" class="gt-pill-btn active" data-attending="yes">
-                    <span>✨</span> Joyfully Attending
+                    <span>✨</span> Happily Joining
                   </button>
                   <button type="button" class="gt-pill-btn" data-attending="no">
                     <span>🤍</span> Regretfully Decline
@@ -768,7 +782,7 @@
               if (isAttending === 'yes') {
                 rsvpText = `Namaste! Wedding RSVP for Dr. Anusri & Vishal (20th December 2026) 🌸\n\n` +
                            `• Guest Name: ${name}\n` +
-                           `• Attending: Joyfully Attending ✨\n` +
+                           `• Attending: Happily Joining ✨\n` +
                            `• Number of Guests: ${guestCount}\n`;
               } else {
                 rsvpText = `Namaste! Wedding RSVP for Dr. Anusri & Vishal (20th December 2026) 🌸\n\n` +
