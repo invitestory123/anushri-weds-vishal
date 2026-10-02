@@ -28,9 +28,12 @@ window.WEDDING_DATA = {
     dateShort: "20 · 12 · 2026",
     timeLabel: "Muhurtham between 10:30 - 11:30 am",
     muhurthamLabel: "Muhurtham between 10:30 - 11:30 am",
+    invitationLine: "With divine grace above us and our families’ blessings beside us, we invite you to share in this sacred moment of our lives.",
     footerDateLocation: "20 · 12 · 2026 · Kannur, Kerala",
     sangeeth: {
       title: "Sangeeth Night",
+      subtitle: "Music · Dance · Celebration",
+      invitationLine: "With rhythm in our hearts and joy in the air, we invite you to celebrate, sing, and dance the night away with us.",
       venue: "Arabian Beach Resort",
       time: "From 5:00 PM onwards",
       address: "Palliyammoola, Payyambalam Beach Road, Kannur, Kerala - 670014",
@@ -56,7 +59,7 @@ window.WEDDING_DATA = {
   images: {
     coupleHero: "./editable/assets/couple-hero.png",
     mapPreview: "./editable/assets/map-preview.jpg",
-    sangeeth: "./editable/assets/ceremony-mandap.jpg",
+    sangeeth: "./editable/assets/sangeeth.jpg",
     ceremonyMandap: "./editable/assets/ceremony-mandap.jpg",
   },
 };
