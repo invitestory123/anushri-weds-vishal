@@ -907,17 +907,134 @@
           }
         }
 
+        function downloadSangeethICS() {
+          const data = window.WEDDING_DATA || {};
+          const sangeeth = (data.wedding && data.wedding.sangeeth) || {};
+          const sVenue = sangeeth.venue || 'Arabian Beach Resort';
+          const sAddress = sangeeth.address || 'Kannur, Kerala';
+          const sDate = sangeeth.dateISO || '2026-12-19T17:00:00+05:30';
+          const eDate = sangeeth.endISO || '2026-12-19T23:00:00+05:30';
+
+          function fmt(iso) {
+            return new Date(iso).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+          }
+
+          const lines = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//Wedding Invite//EN',
+            'BEGIN:VEVENT',
+            `UID:${Date.now()}@sangeeth`,
+            `DTSTAMP:${fmt(new Date().toISOString())}`,
+            `DTSTART:${fmt(sDate)}`,
+            `DTEND:${fmt(eDate)}`,
+            'SUMMARY:Dr. Anusri & Vishal — Sangeeth Night Celebration',
+            `LOCATION:${sVenue}, ${sAddress}`,
+            'DESCRIPTION:With rhythm in our hearts and joy in the air, we invite you to celebrate, sing, and dance the night away with us.',
+            'END:VEVENT',
+            'END:VCALENDAR'
+          ].join('\r\n');
+
+          const blob = new Blob([lines], { type: 'text/calendar;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'sangeeth-night.ics';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }
+
+        function separateSangeethCard() {
+          if (document.getElementById('sangeeth-map-card')) return;
+
+          const data = window.WEDDING_DATA || {};
+          const sangeeth = (data.wedding && data.wedding.sangeeth) || {};
+          const sVenue = sangeeth.venue || 'Arabian Beach Resort';
+          const sAddress = sangeeth.address || 'Palliyammoola, Payyambalam Beach Road, Kannur, Kerala - 670014';
+          const sMapsUrl = sangeeth.mapsUrl || 'https://share.google/FoqulMfRQskuKidvH';
+          const sMapImg = (data.images && data.images.sangeethMapPreview) || './editable/assets/sangeeth-map-preview.jpg';
+
+          // Search for Sangeeth card inside #root
+          const allElements = document.querySelectorAll('#root h2, #root p');
+          let sangeethCard = null;
+          for (const el of allElements) {
+            if (el.textContent && (el.textContent.includes('Pre-wedding celebration') || el.textContent.includes('Sangeeth Night'))) {
+              sangeethCard = el.closest('[class*="border-gold"]') || el.closest('[class*="bg-card"]');
+              if (sangeethCard) break;
+            }
+          }
+
+          if (!sangeethCard) return;
+
+          // 1. Swap button in Sangeeth card to "Add to calendar"
+          const btnWrap = sangeethCard.querySelector('.px-6.pt-2.pb-6') || sangeethCard.querySelector('div:last-child');
+          if (btnWrap && !btnWrap.querySelector('#sangeeth-cal-btn')) {
+            btnWrap.innerHTML = `
+              <button type="button" id="sangeeth-cal-btn" class="from-primary to-emerald-ink text-ivory shadow-gold flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r py-4 text-xs tracking-[0.3em] uppercase" style="cursor:pointer;border:none;">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                Add to calendar
+              </button>
+            `;
+            const calBtn = btnWrap.querySelector('#sangeeth-cal-btn');
+            if (calBtn) {
+              calBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                downloadSangeethICS();
+              });
+            }
+          }
+
+          // 2. Insert separate Sangeeth map card directly below the Sangeeth celebration card
+          const mapCard = document.createElement('div');
+          mapCard.id = 'sangeeth-map-card';
+          mapCard.className = 'border-gold/30 bg-card shadow-luxe mt-6 overflow-hidden rounded-[2rem] border';
+          mapCard.innerHTML = `
+            <div class="relative">
+              <img src="${sMapImg}" alt="Map to ${sVenue}" loading="lazy" width="1024" height="768" class="h-48 w-full object-cover">
+              <div class="from-card absolute inset-0 bg-gradient-to-t via-transparent to-transparent"></div>
+            </div>
+            <div class="px-6 pt-2 pb-6 text-center">
+              <p class="text-primary text-xl font-medium">${sVenue}</p>
+              <p class="text-muted-foreground mt-1 text-xs">${sAddress}</p>
+              <a href="${sMapsUrl}" target="_blank" rel="noreferrer" class="border-gold/50 text-primary hover:bg-secondary mt-5 inline-flex items-center justify-center gap-2 rounded-full border px-7 py-3.5 text-xs tracking-[0.3em] uppercase transition-colors" style="text-decoration:none;">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+                </svg>
+                Get directions
+              </a>
+            </div>
+          `;
+
+          const animContainer = sangeethCard.parentElement && sangeethCard.parentElement.tagName.toLowerCase() === 'div' && sangeethCard.parentElement.parentElement && sangeethCard.parentElement.parentElement.tagName.toLowerCase() === 'div' ? sangeethCard.parentElement : sangeethCard;
+          animContainer.parentNode.insertBefore(mapCard, animContainer.nextSibling);
+        }
+
         // Run when DOM is ready and observe for React mount
         if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', initGuestTracker);
+          document.addEventListener('DOMContentLoaded', function() {
+            initGuestTracker();
+            separateSangeethCard();
+          });
         } else {
           initGuestTracker();
+          separateSangeethCard();
         }
 
         // MutationObserver to ensure insertion once React finishes rendering
         const observer = new MutationObserver(function() {
           if (!document.getElementById('guest-tracker-section')) {
             initGuestTracker();
+          }
+          if (!document.getElementById('sangeeth-map-card')) {
+            separateSangeethCard();
           }
         });
 
