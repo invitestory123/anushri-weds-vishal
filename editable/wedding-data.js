@@ -38,6 +38,10 @@ window.WEDDING_DATA = {
       time: "From 5:00 PM onwards",
       address: "Palliyammoola, Payyambalam Beach Road, Kannur, Kerala - 670014",
       mapsUrl: "https://share.google/FoqulMfRQskuKidvH",
+      dateLabel: "19th December 2026, Saturday",
+      dateShort: "19 · 12 · 2026",
+      dateISO: "2026-12-19T17:00:00+05:30",
+      endISO: "2026-12-19T23:00:00+05:30",
     },
   },
 
@@ -59,8 +63,11 @@ window.WEDDING_DATA = {
   images: {
     coupleHero: "./editable/assets/couple-hero.png",
     mapPreview: "./editable/assets/map-preview.jpg",
+    sangeethMapPreview: "./editable/assets/sangeeth-map-preview.jpg",
     sangeeth: "./editable/assets/sangeeth.jpg",
     ceremonyMandap: "./editable/assets/ceremony-mandap.jpg",
+    mandalaTextureRed: "./editable/assets/mandala-texture-red.jpg",
+    bgMusic: "./editable/assets/bg-music.mp3",
   },
 };
 
