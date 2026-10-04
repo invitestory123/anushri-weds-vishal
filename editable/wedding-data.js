@@ -49,7 +49,7 @@ window.WEDDING_DATA = {
     phone: "+919173075928",
     whatsappClean: "919173075928",
     title: "Guest Tracker & RSVP",
-    subtitle: "We would be honored by your presence",
+    subtitle: "We would be honored by your presence at our Sangeeth Night & Wedding Ceremony",
   },
 
   venue: {

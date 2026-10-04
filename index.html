@@ -663,6 +663,149 @@
         font-weight: 700;
         box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
       }
+      /* Event Preview Banner in RSVP */
+      .gt-events-banner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        margin: 0.4rem 0 1.5rem;
+        text-align: left;
+      }
+      @media (max-width: 440px) {
+        .gt-events-banner {
+          grid-template-columns: 1fr;
+          gap: 0.6rem;
+        }
+      }
+      .gt-event-card {
+        background: rgba(8, 22, 15, 0.75);
+        border: 1px solid rgba(220, 185, 80, 0.35);
+        border-radius: 1.1rem;
+        padding: 0.85rem 0.95rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .gt-event-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(220, 185, 80, 0.8), transparent);
+      }
+      .gt-event-card-tag {
+        font-family: 'Cinzel', serif;
+        font-size: 0.62rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #FCE38A;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+      .gt-event-card-name {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #FFFFFF;
+        line-height: 1.2;
+      }
+      .gt-event-card-date {
+        font-size: 0.74rem;
+        color: #FCE38A;
+        font-weight: 500;
+        margin-top: 0.1rem;
+      }
+      .gt-event-card-venue {
+        font-size: 0.68rem;
+        color: rgba(255, 249, 234, 0.72);
+        line-height: 1.25;
+      }
+      /* Event Selection Choices */
+      .gt-event-choices {
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+      }
+      .gt-event-choice-btn {
+        width: 100%;
+        background: rgba(8, 22, 15, 0.65);
+        border: 1px solid rgba(220, 185, 80, 0.35);
+        border-radius: 1rem;
+        padding: 0.75rem 0.95rem;
+        color: rgba(255, 249, 234, 0.88);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-align: left;
+      }
+      .gt-choice-icon {
+        font-size: 1.25rem;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+      .gt-choice-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .gt-choice-title {
+        font-family: 'Cinzel', serif;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        color: #FFFFFF;
+        line-height: 1.2;
+      }
+      .gt-choice-meta {
+        font-size: 0.72rem;
+        color: rgba(255, 249, 234, 0.72);
+        margin-top: 0.15rem;
+        line-height: 1.25;
+      }
+      .gt-choice-radio {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(220, 185, 80, 0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: all 0.2s ease;
+      }
+      .gt-choice-radio-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: transparent;
+        transition: background-color 0.2s ease;
+      }
+      .gt-event-choice-btn.active {
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.32), rgba(22, 54, 38, 0.96));
+        border-color: #FCE38A;
+        box-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
+      }
+      .gt-event-choice-btn.active .gt-choice-title {
+        color: #FCE38A;
+        font-weight: 700;
+      }
+      .gt-event-choice-btn.active .gt-choice-meta {
+        color: rgba(255, 249, 234, 0.92);
+      }
+      .gt-event-choice-btn.active .gt-choice-radio {
+        border-color: #FCE38A;
+        background: rgba(252, 227, 138, 0.15);
+      }
+      .gt-event-choice-btn.active .gt-choice-radio-dot {
+        background: #FCE38A;
+      }
       .gt-submit-btn {
         width: 100%;
         margin-top: 1.2rem;
@@ -725,8 +868,9 @@
     <!-- Guest Tracker & WhatsApp RSVP Dynamic Integration -->
     <script>
       (function() {
-        const RSVP_PHONE = "919173075928";
-        const RSVP_PHONE_DISPLAY = "+91 91730 75928";
+        const dataRsvp = (window.WEDDING_DATA && window.WEDDING_DATA.rsvp) || {};
+        const RSVP_PHONE = dataRsvp.whatsappClean || "919173075928";
+        const RSVP_PHONE_DISPLAY = dataRsvp.phone || "+91 91730 75928";
 
         function getGuestParam() {
           try {
@@ -739,6 +883,18 @@
 
         function createGuestTrackerHtml(guestName) {
           const hasGuest = Boolean(guestName);
+          const data = window.WEDDING_DATA || {};
+          const wedding = data.wedding || {};
+          const sangeeth = wedding.sangeeth || {};
+
+          const sDate = sangeeth.dateLabel || '19th December 2026, Saturday';
+          const sTime = sangeeth.time || 'From 5:00 PM onwards';
+          const sVenue = sangeeth.venue || 'Arabian Beach Resort';
+
+          const wDate = wedding.dateLabel || '20th December 2026, Sunday';
+          const wTime = wedding.muhurthamLabel || wedding.timeLabel || 'Muhurtham 10:30 - 11:30 AM';
+          const wVenue = (data.venue && data.venue.name) || 'CR Auditorium, Eachur';
+
           return `
             <div class="pointer-events-none absolute inset-0 opacity-20" style="background-image:url('external/media.invitestory.in/kerala-sands/images/mandala-texture.jpg');background-size:130%;background-position:center;"></div>
             <img src="external/media.invitestory.in/kerala-sands/images/floral-corner.png" alt="" aria-hidden="true" loading="lazy" class="pointer-events-none absolute -top-4 -left-8 w-36 opacity-30">
@@ -747,7 +903,23 @@
             <div class="gt-card">
               <div class="gt-badge">Guest Tracker & RSVP</div>
               <h2 class="gt-title">Celebrate With Us</h2>
-              <p class="gt-subtitle">Your presence is the greatest gift & blessing to our union</p>
+              <p class="gt-subtitle">We would be honored by your presence at our wedding celebrations</p>
+
+              <!-- Events Overview: Sangeeth Night & Wedding Ceremony -->
+              <div class="gt-events-banner">
+                <div class="gt-event-card">
+                  <div class="gt-event-card-tag"><span>🪩</span> Day 1 · Sangeeth</div>
+                  <div class="gt-event-card-name">Sangeeth Night</div>
+                  <div class="gt-event-card-date">${sDate}</div>
+                  <div class="gt-event-card-venue">${sTime} · ${sVenue}</div>
+                </div>
+                <div class="gt-event-card">
+                  <div class="gt-event-card-tag"><span>🌸</span> Day 2 · Muhurtham</div>
+                  <div class="gt-event-card-name">Wedding Ceremony</div>
+                  <div class="gt-event-card-date">${wDate}</div>
+                  <div class="gt-event-card-venue">${wTime} · ${wVenue}</div>
+                </div>
+              </div>
 
               ${hasGuest ? `
               <div class="gt-vip-banner">
@@ -765,6 +937,37 @@
                   </button>
                   <button type="button" class="gt-pill-btn" data-attending="no">
                     <span>🤍</span> Regretfully Decline
+                  </button>
+                </div>
+              </div>
+
+              <!-- Celebration Event Selection -->
+              <div class="gt-form-group" id="gt-event-choice-group">
+                <label class="gt-label">Which celebration(s) will you attend?</label>
+                <div class="gt-event-choices">
+                  <button type="button" class="gt-event-choice-btn active" data-choice="both">
+                    <span class="gt-choice-icon">✨</span>
+                    <div class="gt-choice-body">
+                      <div class="gt-choice-title">Both Celebrations</div>
+                      <div class="gt-choice-meta">Sangeeth Night (19 Dec) &amp; Wedding Ceremony (20 Dec)</div>
+                    </div>
+                    <div class="gt-choice-radio"><span class="gt-choice-radio-dot"></span></div>
+                  </button>
+                  <button type="button" class="gt-event-choice-btn" data-choice="sangeeth">
+                    <span class="gt-choice-icon">🪩</span>
+                    <div class="gt-choice-body">
+                      <div class="gt-choice-title">Sangeeth Night Only</div>
+                      <div class="gt-choice-meta">19th Dec 2026, Sat · From 5:00 PM (${sVenue})</div>
+                    </div>
+                    <div class="gt-choice-radio"><span class="gt-choice-radio-dot"></span></div>
+                  </button>
+                  <button type="button" class="gt-event-choice-btn" data-choice="wedding">
+                    <span class="gt-choice-icon">🌸</span>
+                    <div class="gt-choice-body">
+                      <div class="gt-choice-title">Wedding Ceremony Only</div>
+                      <div class="gt-choice-meta">20th Dec 2026, Sun · Muhurtham 10:30 AM (${wVenue})</div>
+                    </div>
+                    <div class="gt-choice-radio"><span class="gt-choice-radio-dot"></span></div>
                   </button>
                 </div>
               </div>
@@ -806,7 +1009,7 @@
               </div>
 
               <!-- Direct Chat WhatsApp Contact -->
-              <a href="https://wa.me/${RSVP_PHONE}?text=${encodeURIComponent('Hello Vishal & Anusri, I would like to RSVP for your wedding celebrations.')}" target="_blank" rel="noreferrer" class="gt-direct-link">
+              <a href="https://wa.me/${RSVP_PHONE}?text=${encodeURIComponent('Hello Vishal & Anusri, I would like to RSVP for your Sangeeth Night (19th Dec 2026) and Wedding Ceremony (20th Dec 2026).')}" target="_blank" rel="noreferrer" class="gt-direct-link">
                 <span>💬</span> Direct WhatsApp RSVP: ${RSVP_PHONE_DISPLAY}
               </a>
             </div>
@@ -845,11 +1048,13 @@
 
         function bindTrackerEvents(container) {
           let isAttending = 'yes';
+          let selectedChoice = 'both';
           let guestCount = '2';
 
           // Attendance toggle
           const attendBtns = container.querySelectorAll('.gt-pill-btn');
           const countGroup = container.querySelector('#gt-count-group');
+          const eventChoiceGroup = container.querySelector('#gt-event-choice-group');
 
           attendBtns.forEach(btn => {
             btn.addEventListener('click', function() {
@@ -859,6 +1064,19 @@
               if (countGroup) {
                 countGroup.style.display = isAttending === 'no' ? 'none' : 'block';
               }
+              if (eventChoiceGroup) {
+                eventChoiceGroup.style.display = isAttending === 'no' ? 'none' : 'block';
+              }
+            });
+          });
+
+          // Celebration Event toggle
+          const choiceBtns = container.querySelectorAll('.gt-event-choice-btn');
+          choiceBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+              choiceBtns.forEach(b => b.classList.remove('active'));
+              this.classList.add('active');
+              selectedChoice = this.getAttribute('data-choice');
             });
           });
 
@@ -884,22 +1102,53 @@
               const name = (nameInput && nameInput.value ? nameInput.value.trim() : '') || 'Guest';
               const message = msgInput && msgInput.value ? msgInput.value.trim() : '';
 
+              const data = window.WEDDING_DATA || {};
+              const wedding = data.wedding || {};
+              const sangeeth = wedding.sangeeth || {};
+
+              const sDate = sangeeth.dateLabel || '19th December 2026, Saturday';
+              const sVenue = sangeeth.venue || 'Arabian Beach Resort, Kannur';
+              const sTime = sangeeth.time || 'From 5:00 PM';
+              const wDate = wedding.dateLabel || '20th December 2026, Sunday';
+              const wVenue = (data.venue && data.venue.name) || 'CR Auditorium, Eachur, Kannur';
+              const wTime = wedding.muhurthamLabel || wedding.timeLabel || 'Muhurtham 10:30 - 11:30 AM';
+
               let rsvpText = '';
               if (isAttending === 'yes') {
-                rsvpText = `Namaste! Wedding RSVP for Dr. Anusri & Vishal (20th December 2026) 🌸\n\n` +
+                let attendingEventsText = '';
+                if (selectedChoice === 'both') {
+                  attendingEventsText = `• Attending: Both Celebrations ✨\n` +
+                    `   1. Sangeeth Night: ${sDate} (${sTime}) at ${sVenue}\n` +
+                    `   2. Wedding Ceremony: ${wDate} (${wTime}) at ${wVenue}\n`;
+                } else if (selectedChoice === 'sangeeth') {
+                  attendingEventsText = `• Attending: Sangeeth Night Only 🪩\n` +
+                    `   Date: ${sDate} (${sTime})\n` +
+                    `   Venue: ${sVenue}\n`;
+                } else {
+                  attendingEventsText = `• Attending: Wedding Ceremony Only 🌸\n` +
+                    `   Date: ${wDate} (${wTime})\n` +
+                    `   Venue: ${wVenue}\n`;
+                }
+
+                rsvpText = `Namaste! Wedding RSVP for Dr. Anusri & Vishal 🌸\n\n` +
                            `• Guest Name: ${name}\n` +
-                           `• Attending: Happily Joining ✨\n` +
+                           `• Status: Happily Joining ✨\n` +
+                           attendingEventsText +
                            `• Number of Guests: ${guestCount}\n`;
               } else {
-                rsvpText = `Namaste! Wedding RSVP for Dr. Anusri & Vishal (20th December 2026) 🌸\n\n` +
+                rsvpText = `Namaste! Wedding RSVP for Dr. Anusri & Vishal 🌸\n\n` +
                            `• Guest Name: ${name}\n` +
-                           `• Attending: Regretfully Unable to Attend 🤍\n`;
+                           `• Status: Regretfully Unable to Attend 🤍\n` +
+                           `• Events: Sangeeth Night (${sDate}) & Wedding Ceremony (${wDate})\n`;
               }
 
               if (message) {
                 rsvpText += `• Wishes: "${message}"\n`;
               }
-              rsvpText += `\nCR Auditorium, Eachur, Kannur`;
+
+              rsvpText += `\n📍 Celebrations:\n` +
+                          `• 19 Dec 2026: Sangeeth Night · Arabian Beach Resort\n` +
+                          `• 20 Dec 2026: Wedding Ceremony · CR Auditorium, Eachur`;
 
               const waUrl = `https://wa.me/${RSVP_PHONE}?text=${encodeURIComponent(rsvpText)}`;
 
