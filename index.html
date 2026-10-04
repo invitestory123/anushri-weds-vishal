@@ -974,7 +974,44 @@
 
           if (!sangeethCard) return;
 
-          // 1. Swap button in Sangeeth card to "Add to calendar"
+          // 1. Prominent written Date badge in Sangeeth header
+          const headerWrap = sangeethCard.querySelector('.from-primary.to-emerald-ink') || sangeethCard.querySelector('[class*="bg-gradient-to-br"]');
+          if (headerWrap && !headerWrap.querySelector('.sangeeth-date-pill')) {
+            const datePill = document.createElement('div');
+            datePill.className = 'sangeeth-date-pill';
+            datePill.style.cssText = 'margin: 0.95rem auto 0.4rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: rgba(0,0,0,0.36); border: 1.5px solid rgba(220,185,80,0.55); border-radius: 9999px; padding: 0.45rem 1.3rem; color: #FCE38A; font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; font-family: "Cinzel", serif; box-shadow: 0 4px 14px rgba(0,0,0,0.25);';
+            datePill.innerHTML = `<span>🗓️</span> ${sangeeth.dateLabel || '19th December 2026, Saturday'}`;
+            const quoteEl = headerWrap.querySelector('.sangeeth-quote') || headerWrap.querySelector('p:last-child');
+            if (quoteEl) {
+              headerWrap.insertBefore(datePill, quoteEl);
+            } else {
+              headerWrap.appendChild(datePill);
+            }
+          }
+
+          // 2. Add Event Date row into the details list
+          const divideWrap = sangeethCard.querySelector('.divide-gold\\/15') || sangeethCard.querySelector('[class*="divide-y"]');
+          if (divideWrap && !divideWrap.querySelector('.sangeeth-date-row')) {
+            const dateRow = document.createElement('div');
+            dateRow.className = 'flex items-center gap-4 px-6 py-4 sangeeth-date-row';
+            dateRow.innerHTML = `
+              <span class="bg-secondary text-primary grid h-10 w-10 shrink-0 place-items-center rounded-full">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </span>
+              <div class="min-w-0">
+                <p class="text-muted-foreground text-[0.6rem] tracking-[0.3em] uppercase">Event Date</p>
+                <p class="text-foreground text-sm font-medium">${sangeeth.dateLabel || '19th December 2026, Saturday'}</p>
+              </div>
+            `;
+            divideWrap.insertBefore(dateRow, divideWrap.firstChild);
+          }
+
+          // 3. Swap button in Sangeeth card to "Add to calendar"
           const btnWrap = sangeethCard.querySelector('.px-6.pt-2.pb-6') || sangeethCard.querySelector('div:last-child');
           if (btnWrap && !btnWrap.querySelector('#sangeeth-cal-btn')) {
             btnWrap.innerHTML = `
