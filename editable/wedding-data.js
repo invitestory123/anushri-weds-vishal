@@ -60,28 +60,8 @@ window.WEDDING_DATA = {
     mapUrl: "https://share.google/PCLpVzqm5MXZN5yz4",
   },
 
-  coupleProfile: {
-    title: "The Couple",
-    subtitle: "Two Souls, One Journey",
-    photo: "./editable/assets/couple-portfolio.jpg",
-    bride: {
-      name: "Sayantika Pal",
-      line: "Daughter of Mrs. Rinku & Mr. Himangshu Pal",
-    },
-    groom: {
-      name: "Anirban Dey",
-      line: "Son of Mrs. Shikha & Mr. Debaprosad Dey",
-    },
-    familyBlessing: {
-      heading: "We can't wait to celebrate with you",
-      subheading: "WITH LOVE, THE DEY & PAL FAMILIES",
-      hashtag: "#AnirbanWedsSayantika",
-    },
-  },
-
   images: {
     coupleHero: "./editable/assets/couple-hero.png",
-    couplePortfolio: "./editable/assets/couple-portfolio.jpg",
     mapPreview: "./editable/assets/map-preview.jpg",
     sangeethMapPreview: "./editable/assets/sangeeth-map-preview.jpg",
     sangeeth: "./editable/assets/sangeeth.jpg",
